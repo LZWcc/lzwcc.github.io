@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h1, h2, h3, h4 {
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 20px;
+}
+
+hr {
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+}
+
+p {
+    text-align: center;
+    color: #666;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+.contact-info {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-image {
+    height: 150px;  /* 或合适的值 */
+    width: auto;    /* 保持宽高比 */
+    object-fit: cover;  /* 保证图片不变形 */
+}
+
+/* 针对二维码/联系方式图片 */
+.contact-image {
+    width: 300px;   /* 或合适的值 */
+    height: auto;   /* 保持宽高比 */
+}

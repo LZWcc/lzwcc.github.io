@@ -1,0 +1,62 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+.eggs/
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+.env/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# PyInstaller
+*.manifest
+*.spec
+
+# MyPy / Pylint / coverage reports
+.mypy_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.tox/
+.cache/
+
+# macOS system files
+.DS_Store
+
+# VS Code settings
+.vscode/
+
+# log and temp files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+
+# IDEs
+.idea/
+*.iml
+
+# System-specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# git ignore itself
+# .gitignore
