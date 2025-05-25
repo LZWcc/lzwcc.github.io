@@ -1,10 +1,8 @@
 +++
 date = '2025-05-24T18:07:09+08:00'
 draft = false
-title = 'My First Post'
+title = '算竞常用C++代码片段'
 +++
-
-# 1 基础模板
 
 ## 1.1 快读
 
