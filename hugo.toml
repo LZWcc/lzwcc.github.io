@@ -10,9 +10,10 @@ theme = 'DoIt'
     rss = 10
     [params.home.profile]
       enable = true
-      title = "title' view"
-      subtitle = "subTitle"
+      title = "LZWcc's Blog"
+      subtitle = "Student."
       avatarURL = "/images/avatar.jpg"
+      typeit = true
       
   # 页脚信息
   [params.footer]
