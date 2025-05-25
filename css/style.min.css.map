@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "style.min.css",
-	"sourceRoot": "/home/runner/work/lzwcc.github.io/lzwcc.github.io",
+	"sourceRoot": "/Users/lzwcc/Documents/lzwcc.github.io",
 	"sources": [
 		"themes/DoIt/assets/css/style.scss",
 		"themes/DoIt/assets/css/_variables.scss",
