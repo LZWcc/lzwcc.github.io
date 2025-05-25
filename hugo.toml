@@ -1,0 +1,22 @@
+baseURL = 'https://lzwcc.github.io/'
+languageCode = 'zh-cn'
+title = "LZWcc's Blog"
+theme = 'DoIt'
+
+# 添加更多配置
+[params]
+  # 主页信息
+  [params.home]
+    rss = 10
+    [params.home.profile]
+      enable = true
+      title = "title' view"
+      subtitle = "subTitle"
+      avatarURL = "/images/avatar.jpg"
+      
+  # 页脚信息
+  [params.footer]
+    enable = true
+    copyright = true
+    author = true
+    since = 2023
