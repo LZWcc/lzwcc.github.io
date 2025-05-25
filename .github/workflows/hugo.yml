@@ -29,7 +29,7 @@ jobs:
         run: cat hugo.toml || echo "No hugo.toml file found"
       
       - name: Build
-        run: hugo --minify --debug
+        run: hugo --minify --logLevel debug
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
