@@ -3,11 +3,12 @@
         <title>所有文章 - LZWcc&#39;s Blog</title>
         <link>http://localhost:1313/posts/</link>
         <description>所有文章 | LZWcc&#39;s Blog</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 24 May 2025 18:07:09 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>l1274645232@gmail.com (LZWcc)</managingEditor>
+            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Sat, 24 May 2025 18:07:09 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
     <title>算竞常用C&#43;&#43;代码片段</title>
     <link>http://localhost:1313/posts/my-first-post/</link>
     <pubDate>Sat, 24 May 2025 18:07:09 &#43;0800</pubDate><author>
-        <name>作者</name>
+        <name>LZWcc</name>
     </author><guid>http://localhost:1313/posts/my-first-post/</guid>
     <description><![CDATA[<h2 id="11-快读" class="headerLink">
     <a href="#11-%e5%bf%ab%e8%af%bb" class="header-mark"></a>1.1 快读</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">

@@ -8,6 +8,11 @@ theme = 'DoIt'
 [params]
   # DoIt 主题版本
   version = "0.2.X"
+
+  [params.author]
+  name = "LZWcc"
+  email = "l1274645232@gmail.com"
+  link = "https://lzwcc.github.io"
   
   # 主页信息
   [params.home]
