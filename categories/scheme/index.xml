@@ -1,0 +1,8 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Scheme - 分类 - LZWcc&#39;s Blog</title>
+        <link>http://localhost:1313/categories/scheme/</link>
+        <description>Scheme - 分类 - LZWcc&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>l1274645232@gmail.com (LZWcc)</managingEditor>
+            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><atom:link href="http://localhost:1313/categories/scheme/" rel="self" type="application/rss+xml" /></channel>
+</rss>
