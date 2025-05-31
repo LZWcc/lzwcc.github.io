@@ -2,9 +2,10 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
+            <loc>http://localhost:1313/</loc><lastmod>2025-05-31T22:31:32&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/</loc><lastmod>2025-05-31T22:31:32&#43;08:00</lastmod></url><url>
+            <loc>http://localhost:1313/posts/scheme01/</loc><lastmod>2025-05-31T22:31:32&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/about/</loc><lastmod>2025-05-25T15:23:28&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/</loc><lastmod>2025-05-25T15:23:28&#43;08:00</lastmod></url><url>
-            <loc>http://localhost:1313/posts/</loc><lastmod>2025-05-24T18:07:09&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/posts/my-first-post/</loc><lastmod>2025-05-24T18:07:09&#43;08:00</lastmod></url><url>
             <loc>http://localhost:1313/categories/</loc></url><url>
             <loc>http://localhost:1313/tags/</loc></url></urlset>
