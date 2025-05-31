@@ -4,5 +4,26 @@
         <link>http://localhost:1313/categories/</link>
         <description>Categories - 分类 - LZWcc&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>l1274645232@gmail.com (LZWcc)</managingEditor>
-            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><atom:link href="http://localhost:1313/categories/" rel="self" type="application/rss+xml" /></channel>
+            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Sat, 31 May 2025 22:31:32 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>CS61A</title>
+    <link>http://localhost:1313/categories/cs61a/</link>
+    <pubDate>Sat, 31 May 2025 22:31:32 &#43;0800</pubDate><author>
+        <name>LZWcc</name>
+    </author><guid>http://localhost:1313/categories/cs61a/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>CS^</title>
+    <link>http://localhost:1313/categories/cs/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>
+        <name>LZWcc</name>
+    </author><guid>http://localhost:1313/categories/cs/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
+    <title>Scheme</title>
+    <link>http://localhost:1313/categories/scheme/</link>
+    <pubDate>Mon, 01 Jan 0001 00:00:00 &#43;0000</pubDate><author>
+        <name>LZWcc</name>
+    </author><guid>http://localhost:1313/categories/scheme/</guid>
+    <description><![CDATA[]]></description>
+</item></channel>
 </rss>

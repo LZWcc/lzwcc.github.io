@@ -1,6 +1,8 @@
 +++
 date = '2025-05-31T22:31:32+08:00'
 draft = false
+categories = ['CS61A']
+tags = ['Scheme']
 title = 'Scheme 中常用表达式的用法'
 +++
 
