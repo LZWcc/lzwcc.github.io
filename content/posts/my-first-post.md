@@ -1,12 +1,13 @@
 +++
 date = '2025-05-24T18:07:09+08:00'
 draft = false
-title = '算竞常用C++代码片段'
+title = '算竞常用cpp代码片段'
+math = true
 +++
 
 ## 1.1 快读
 
-```c++
+```cpp
 
 char buf[1<<21],*p1 = buf, *p2 = buf;
 
@@ -52,7 +53,7 @@ return s * w;
 
 ## 1.2 快写
 
-```c++
+```cpp
 
 inlinevoidwrite(intx) {
 
@@ -107,7 +108,7 @@ for (int j =2; j * i < MAXN; j++)
 
 ## 2.1.2 欧拉筛 线性筛 Euler
 
-```c++
+```cpp
 
 int primes[N], cnt;
 
@@ -253,7 +254,7 @@ return b ?gcd(b, a % b) : a;
 
 #### 2.5.1.1 队列
 
-```c++
+```cpp
 
 #definex first
 
@@ -315,7 +316,7 @@ if(dist[a][b] >=0) continue;
 
 #### 2.5.1.2 数组模拟队列
 
-```c++
+```cpp
 
 PII q[N * N];
 
@@ -355,7 +356,7 @@ if(...) continue;
 
 ### 2.6.1 I / O
 
-```c++
+```cpp
 
 /* 输入 */
 
@@ -402,7 +403,7 @@ for(int i = res.size() -1;i >=0;i--);
 
 ### 2.6.2  BI + BI
 
-```c++
+```cpp
 
 //C = A + B, A >= 0
 
@@ -436,7 +437,7 @@ return C;
 
 ### 2.6.3 BI - BI
 
-```c++
+```cpp
 
 vector<int> sub(vector<int>&A, vector<int>&B) {
 
@@ -482,7 +483,7 @@ returntrue; // 如果A, B相等 返回true
 
 ### 2.6.4 BI *  I
 
-```c++
+```cpp
 
 // C = A * b, A >= 0, b >= 0;
 
@@ -512,7 +513,7 @@ return C;
 
 ### 2.6.5 BI * BI
 
-```c++
+```cpp
 
 vector<int> mul(vector<int> &A, vector<int> &B) {
 
@@ -543,7 +544,7 @@ return C;
 
 ### 2.6.6 BI / I
 
-```c++
+```cpp
 
 vector<int> div(vector<int>&A, intb, int&r) {    // r为余数
 
@@ -582,7 +583,7 @@ auto res =div(A, b, r);
 
 ### 2.7.2 二维前缀和
 
-```c++
+```cpp
 
 //二维前缀和 
 
@@ -594,7 +595,7 @@ auto res =div(A, b, r);
 
 ### 2.8 二分查找
 
-```c++
+```cpp
 
 // 查找第一个大于等于 x 的元素的位置。
 
@@ -618,7 +619,7 @@ return r;
 
 ```
 
-```c++
+```cpp
 
 // 查找最后一个小于等于 x 的元素的位置。
 
@@ -706,7 +707,7 @@ else
 
 ### 3.1 模拟队列
 
-```c++
+```cpp
 
 // 先进先出
 
@@ -741,7 +742,7 @@ q[hh];
 
 ### 3.2 模拟栈
 
-```c++
+```cpp
 
 // 先进后出 / 后进先出
 
@@ -776,7 +777,7 @@ stk[tt];
 
 ### 3.3.1 路径压缩
 
-```c++
+```cpp
 
 // 1.将两个集合合并
 
@@ -827,7 +828,7 @@ voidmerge(inti, j) {  // 合并
 
 ### 4.2.1 求约数个数 / 求正因数个数
 
-```c++
+```cpp
 
 constint mod =1e9+7;
 
@@ -871,7 +872,7 @@ $$
 
 和约数个数定理的理解类似，就是对于第 $i$ 个质因子 $p_i$，可以选 0, 1, 2, …, $a_i$ 个，共 (1 + $a_i$) 种选法，而选择  $j$  个  $p_i$ 对于答案的贡献为 $p_i^j$ 。 对于上述的式子，利用乘法分配律，可以不重不漏地选出所有的可能的组合。
 
-```c++
+```cpp
 
 LL res =1;
 
@@ -895,7 +896,7 @@ cout << res << endl;
 
 ## 4.2.3 分解质因数
 
-```c++
+```cpp
 
 voiddiv(intx) {
 
@@ -955,7 +956,7 @@ $$
 
 时间复杂度：$O(\sqrt{n})$
 
-```c++
+```cpp
 
 int a;
 
@@ -1011,7 +1012,7 @@ $$
 
 *1.* 判断整数中是否包含某个数字
 
-```c++
+```cpp
 
 #include<string>
 
@@ -1042,22 +1043,12 @@ return s.find('2') == string::npos && s.find('4') == string::npos;
 - 一维转二维：`i = index / col(x); j = index % col(x)`  除以列  / 对列取余
 - 设一维数组下标为index，二维数组长度为m * n，则：
 
-  **一维数组转换为二维数组**
-
-  ```c
-
-  ```
+**一维数组转换为二维数组**
 
 row = index / n
 
 col = index % n
 
-    ```
-
-    **二维数组转换为一维数组**
-
-    ```c
+**二维数组转换为一维数组**
 
 index = col + row * n
-
-    ```

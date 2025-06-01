@@ -5,9 +5,16 @@
         <description>Categories - 分类 - LZWcc&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>l1274645232@gmail.com (LZWcc)</managingEditor>
             <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Sat, 31 May 2025 22:56:17 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/categories/" rel="self" type="application/rss+xml" /><item>
+    <title>MacOS</title>
+    <link>http://localhost:1313/categories/macos/</link>
+    <pubDate>Sat, 31 May 2025 22:56:17 &#43;0800</pubDate><author>
+        <name>LZWcc</name>
+    </author><guid>http://localhost:1313/categories/macos/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>CS61A</title>
     <link>http://localhost:1313/categories/cs61a/</link>
-    <pubDate>Sat, 31 May 2025 22:56:17 &#43;0800</pubDate><author>
+    <pubDate>Sat, 31 May 2025 22:31:32 &#43;0800</pubDate><author>
         <name>LZWcc</name>
     </author><guid>http://localhost:1313/categories/cs61a/</guid>
     <description><![CDATA[]]></description>
