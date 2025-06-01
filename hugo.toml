@@ -8,7 +8,19 @@ theme = 'DoIt'
 [params]
   # DoIt 主题版本
   version = "0.2.X"
+  math = true
 
+  [params.page.math]
+    enable = true
+    # 块级公式分隔符
+    blockLeftDelimiter = "$$"
+    blockRightDelimiter = "$$"
+    # 行内公式分隔符
+    inlineLeftDelimiter = "$"
+    inlineRightDelimiter = "$"
+    # 其他选项
+    copyTex = true
+    mhchem = true
   [params.author]
   name = "LZWcc"
   email = "l1274645232@gmail.com"
@@ -72,3 +84,4 @@ theme = 'DoIt'
   [markup.highlight]
     # false 是必要的设置
     noClasses = false
+  
