@@ -4,7 +4,42 @@
         <link>http://localhost:1313/posts/</link>
         <description>所有文章 | LZWcc&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>l1274645232@gmail.com (LZWcc)</managingEditor>
-            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Sat, 31 May 2025 22:56:17 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Mon, 02 Jun 2025 02:37:51 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>第五届“计协杯”程序设计竞赛暨ACM实验室招新选拔4月赛--题解</title>
+    <link>http://localhost:1313/posts/hnie_contest_2025/</link>
+    <pubDate>Mon, 02 Jun 2025 02:37:51 &#43;0800</pubDate><author>
+        <name>LZWcc</name>
+    </author><guid>http://localhost:1313/posts/hnie_contest_2025/</guid>
+    <description><![CDATA[<hr>
+<h2 id="问题a-正方形字符串" class="headerLink">
+    <a href="#%e9%97%ae%e9%a2%98a-%e6%ad%a3%e6%96%b9%e5%bd%a2%e5%ad%97%e7%ac%a6%e4%b8%b2" class="header-mark"></a>问题A: 正方形字符串</h2><h4 id="题目描述" class="headerLink">
+    <a href="#%e9%a2%98%e7%9b%ae%e6%8f%8f%e8%bf%b0" class="header-mark"></a>题目描述</h4><p>现请你输出指定大小的“ACM”字符串。特别地，我们要求输出的字符串是正方形的（行数和列数相等）。</p>
+<h4 id="输入格式" class="headerLink">
+    <a href="#%e8%be%93%e5%85%a5%e6%a0%bc%e5%bc%8f" class="header-mark"></a>输入格式</h4><p>输入的第一行是一个正整数N（N&lt;=20），表示一共有N组数据，接着是N行数据，每行包含一个正整数M（M&lt;=50），表示一行内有M个“ACM”相连。</p>
+<h4 id="输出格式" class="headerLink">
+    <a href="#%e8%be%93%e5%87%ba%e6%a0%bc%e5%bc%8f" class="header-mark"></a>输出格式</h4><p>输出指定的正方形字符串。</p>
+<h4 id="输入样例" class="headerLink">
+    <a href="#%e8%be%93%e5%85%a5%e6%a0%b7%e4%be%8b" class="header-mark"></a>输入样例</h4><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">plain</p>]]></description>
+</item><item>
     <title>如何在macOS上解压文件</title>
     <link>http://localhost:1313/posts/how-to-unzip/</link>
     <pubDate>Sat, 31 May 2025 22:56:17 &#43;0800</pubDate><author>

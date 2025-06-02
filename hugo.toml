@@ -10,17 +10,6 @@ theme = 'DoIt'
   version = "0.2.X"
   math = true
 
-  [params.page.math]
-    enable = true
-    # 块级公式分隔符
-    blockLeftDelimiter = "$$"
-    blockRightDelimiter = "$$"
-    # 行内公式分隔符
-    inlineLeftDelimiter = "$"
-    inlineRightDelimiter = "$"
-    # 其他选项
-    copyTex = true
-    mhchem = true
   [params.author]
   name = "LZWcc"
   email = "l1274645232@gmail.com"
@@ -35,13 +24,14 @@ theme = 'DoIt'
       subtitle = "Student."
       avatarURL = "/images/avatar.jpg"
       typeit = true
+    
       
   # 页脚信息
   [params.footer]
     enable = true
     copyright = true
     author = true
-    since = 2023
+    since = 2024
 
 # 菜单配置
 [menu]
@@ -77,6 +67,26 @@ theme = 'DoIt'
     url = "/about/"
     title = ""
     weight = 4
+  [[menu.main]]
+    identifier = "github"
+    pre = "<i class='fab fa-github fa-fw' aria-hidden='true'></i>"
+    name = "GitHub"
+    url = "https://github.com/LZWcc"
+    title = "在 GitHub 上关注我"
+    weight = 5
+  
+  # 数学公式渲染
+  [params.page.math]
+    enable = true
+    # 块级公式分隔符
+    blockLeftDelimiter = "$$"
+    blockRightDelimiter = "$$"
+    # 行内公式分隔符
+    inlineLeftDelimiter = "$"
+    inlineRightDelimiter = "$"
+    # 其他选项
+    copyTex = true
+    mhchem = true
 
 # Hugo 解析文档的配置
 [markup]
