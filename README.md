@@ -1,17 +1,36 @@
-# LZWcc.github.io
+# LZWcc's Blog
 
-## 项目描述
+欢迎访问我的个人博客！这是一个基于 Hugo 和 DoIt 主题构建的静态网站，用于分享我的学习笔记、技术文章和个人思考。
 
-该项目是一个个人网页，展示了个人简介、学习经历和联系方式。网页采用现代的HTML结构，结合CSS样式和JavaScript交互，旨在提供一个简洁而美观的个人展示平台。
+## 网站特点
 
-## 文件结构
+* 🚀 基于 Hugo 静态网站生成器，速度快，部署简单
+* 📱 响应式设计，在各种设备上都有良好的浏览体验
+* 🧮 支持 LaTeX 数学公式渲染
+* 🌙 支持亮色/暗色模式切换
+* 📁 按分类和标签组织文章
 
-- `index.html`: 项目的主HTML文件，包含网页的基本结构和内容。
-- `css/style.css`: 样式表文件，定义了网页的视觉效果。
-- `js/main.js`: JavaScript文件，包含网页的交互逻辑和动态效果。
+## 主要内容
 
-## 使用说明
+本博客主要记录以下内容：
 
-1. 克隆或下载该项目到本地。
-2. 打开 `index.html` 文件以查看网页。
-3. 根据需要修改 `css/style.css` 和 `js/main.js` 文件以自定义样式和功能。
+* 📝 学习笔记与总结
+* 💻 编程技术分享
+* 🧠 思考与感悟
+* 🎓 学术研究与探索
+
+## 技术栈
+
+* **静态网站生成器** ：[Hugo](vscode-file://vscode-app/Applications/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
+* **主题** ：[DoIt](vscode-file://vscode-app/Applications/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
+* **部署平台** ：GitHub Pages
+* **持续集成** ：GitHub Actions
+
+## 联系方式
+
+* 📧 邮箱：[l1274645232@gmail.com](vscode-file://vscode-app/Applications/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
+* 🌐 GitHub：[LZWcc](vscode-file://vscode-app/Applications/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
+
+---
+
+🔗 博客地址：[https://lzwcc.github.io](vscode-file://vscode-app/Applications/Visual%20Studio%20Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
