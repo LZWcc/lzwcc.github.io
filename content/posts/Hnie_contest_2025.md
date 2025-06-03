@@ -3,9 +3,6 @@ date = '2025-06-02T02:37:51+08:00'
 draft = false
 title = '第五届“计协杯”程序设计竞赛暨ACM实验室招新选拔4月赛--题解'
 +++
-
----
-
 ## 问题A: 正方形字符串
 
 #### 题目描述
@@ -658,6 +655,122 @@ NO
 #### 分类标签
 
 [数据结构-栈](https://www.hnieacm.com/problemset.php?search=数据结构-栈)
+
+---
+
+### 题解
+```cpp
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+#include <stack>
+#include <unordered_map>
+using namespace std;
+unordered_map<char, int> level{
+    {'<', 1}, {'>', 1},  // 最内层
+    {'(', 2}, {')', 2},  // 第二层
+    {'[', 3}, {']', 3},  // 第三层
+    {'{', 4}, {'}', 4}   // 最外层
+};  // 确定括号的优先级
+// 定义括号配对关系
+unordered_map<char, char> pairs{{'>', '<'}, {')', '('}, {'}', '{'}, {']', '['}};
+
+bool match(string str) {
+    stack<char> s;
+    for(int i = 0; i < str.size(); i++) {
+        auto c = str[i];
+        // 左括号直接入栈
+        if(c == '<' || c == '(' || c == '[' || c == '{')
+            s.push(c);
+        else {
+            // 当遇到右括号时
+            // 步骤1: 检查栈是否为空
+            if(s.empty()) return false;
+            // 步骤2: 基本配对检查
+            if(s.top() != pairs[c]) return false;
+            // // 步骤3: 弹出匹配的左括号
+            s.pop();
+            // 步骤4: 层级规则检查
+            if(!s.empty() && level[s.top()] < level[c]) return false;
+            /*
+            level[s.top()]获取栈顶剩余左括号的层级值, 这个左括号将成为当前右括号的"外层"括号
+            level[c]获取当前右括号的层级值
+            如果外层括号的层级 < 内层括号的层级，说明违反了嵌套规则
+            */
+        }
+    }
+    return s.empty();
+}
+
+int main() {
+    int n;
+    scanf("%d", &n);
+    while(n--) {
+        string s;
+        cin >> s;
+        if(match(s))
+            printf("YES\n");
+        else
+            printf("NO\n");
+    }
+    return 0;
+}
+```
+
+#### 关键代码解释
+
+##### 1. 作用: 基本括号配对检查`if(s.top() != pairs[c])`
+
+```cpp
+if(s.top() != pairs[c]) return false;   // 配对检查
+
+// 实例说明
+// pairs映射：{'>', '<'}, {')', '('}, {']', '['}, {'}', '{'}
+
+// 正确配对示例：
+栈: ['(']，当前字符 c = ')'
+s.top() = '('
+pairs[')'] = '('
+'(' == '(' ✓ 配对成功
+
+// 错误配对示例：
+栈: ['[']，当前字符 c = ')'  
+s.top() = '['
+pairs[')'] = '('
+'[' != '(' ❌ 配对失败，返回false
+```
+执行时机: 遇到右括号时, 检查它是否与栈顶的左括号匹配
+
+##### 2. 嵌套层级规则检查`if(!s.empty() && level[s.top()] < level[c])`
+```cpp
+s.pop();    // 先弹出配对的左括号
+if(!s.empty() && level[s.top()] < level[c]) return false;
+// s.empty() 栈顶还有剩余的左括号
+// level[s.top()] < level[c]: 外层括号层级 < 内层括号层级
+
+// 示例1：处理 [()]
+初始栈: ['[', '(']
+遇到 ')':
+1. 配对检查：'(' == pairs[')'] ✓
+2. 弹出 '('：栈变为 ['[']
+3. 层级检查：
+   - s.top() = '['，level['['] = 3
+   - c = ')'，level[')'] = 2  
+   - 3 < 2？ 否 ✓ 继续执行
+
+// 示例2：处理 ([])
+初始栈: ['(', '[']
+遇到 ']':
+1. 配对检查：'[' == pairs[']'] ✓
+2. 弹出 '['：栈变为 ['(']
+3. 层级检查：
+   - s.top() = '('，level['('] = 2
+   - c = ']'，level[']'] = 3
+   - 2 < 3？ 是 ❌ 返回false
+```
+执行时机: 在弹出匹配的左括号之后执行
+
+---
 
 ## 问题 I: 非常可乐
 
