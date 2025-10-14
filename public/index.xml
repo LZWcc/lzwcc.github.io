@@ -4,9 +4,48 @@
         <link>http://localhost:1313/</link>
         <description>LZWcc&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>l1274645232@gmail.com (LZWcc)</managingEditor>
-            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Sun, 12 Oct 2025 18:37:52 &#43;0800</lastBuildDate>
+            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Tue, 14 Oct 2025 13:51:34 &#43;0800</lastBuildDate>
             <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>Vue 3 中使用 getCurrentInstance 获取全局属性动态设置样式</title>
+    <link>http://localhost:1313/posts/vue-ques02/</link>
+    <pubDate>Tue, 14 Oct 2025 13:51:34 &#43;0800</pubDate><author>
+        <name>LZWcc</name>
+    </author><guid>http://localhost:1313/posts/vue-ques02/</guid>
+    <description><![CDATA[<p>在 Vue 3 的开发中，我们有时需要通过全局属性来动态设置组件的样式，例如页面的最大宽度和最小宽度。本文将结合一个实际案例，详细讲解如何使用 <code>getCurrentInstance</code> 获取全局属性，并通过动态绑定样式实现需求。</p>
+<hr>
+<h4 id="1-背景介绍" class="headerLink">
+    <a href="#1-%e8%83%8c%e6%99%af%e4%bb%8b%e7%bb%8d" class="header-mark"></a>1. 背景介绍</h4><p>在 Vue 3 中，<code>app.config.globalProperties</code> 提供了一种方式，可以定义全局属性供所有组件访问。这些全局属性可以在组件中通过 <code>getCurrentInstance</code> 获取，并用于动态设置样式或其他逻辑。</p>
+<p>以下是一个示例场景：</p>
+<ul>
+<li>我们需要设置页面的最大宽度和最小宽度。</li>
+<li>这些宽度值是全局定义的，方便在不同组件中复用。</li>
+</ul>
+<hr>
+<h4 id="2-实现步骤" class="headerLink">
+    <a href="#2-%e5%ae%9e%e7%8e%b0%e6%ad%a5%e9%aa%a4" class="header-mark"></a>2. 实现步骤</h4><h5 id="1在" class="headerLink">
+    <a href="#1%e5%9c%a8" class="header-mark"></a><strong>（1）在 <code>main.js</code> 中定义全局属性</strong></h5><p>首先，在 <code>main.js</code> 中通过 <code>app.config.globalProperties</code> 定义全局属性 <code>bodyMaxWidth</code> 和 <code>bodyMinWidth</code>：</p>
+<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+  <div class="
+    
+    tw-flex 
+    tw-flex-row
+    tw-flex-1 
+    tw-justify-between 
+    tw-w-full tw-bg-bgColor-secondary
+    ">      
+    <button 
+      class="
+        code-block-button
+        tw-mx-2 
+        tw-flex
+        tw-flex-row
+        tw-flex-1"
+      aria-hidden="true">
+          <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
+          <p class="tw-select-none !tw-my-1">javascript</p>]]></description>
+</item><item>
     <title>json-server 常用自定义路由和简单配置</title>
     <link>http://localhost:1313/posts/json-service-ques01/</link>
     <pubDate>Sun, 12 Oct 2025 18:37:52 &#43;0800</pubDate><author>

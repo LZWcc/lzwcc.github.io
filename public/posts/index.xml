@@ -4,7 +4,14 @@
         <link>http://localhost:1313/posts/</link>
         <description>所有文章 | LZWcc&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><managingEditor>l1274645232@gmail.com (LZWcc)</managingEditor>
-            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Sun, 12 Oct 2025 18:37:52 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>l1274645232@gmail.com (LZWcc)</webMaster><lastBuildDate>Tue, 14 Oct 2025 13:51:34 &#43;0800</lastBuildDate><atom:link href="http://localhost:1313/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>Vue 3 中使用 getCurrentInstance 获取全局属性动态设置样式</title>
+    <link>http://localhost:1313/posts/vue-ques02/</link>
+    <pubDate>Tue, 14 Oct 2025 13:51:34 &#43;0800</pubDate><author>
+        <name>LZWcc</name>
+    </author><guid>http://localhost:1313/posts/vue-ques02/</guid>
+    <description><![CDATA[]]></description>
+</item><item>
     <title>json-server 常用自定义路由和简单配置</title>
     <link>http://localhost:1313/posts/json-service-ques01/</link>
     <pubDate>Sun, 12 Oct 2025 18:37:52 &#43;0800</pubDate><author>
