@@ -4,23 +4,20 @@
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="robots" content="noodp" /><title>ELF 文件变量存储与段表/符号表分析笔记 - LZWcc&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://localhost:1313/posts/elf-post01/">
+    <meta name="robots" content="noodp" /><title>面向对象程序设计--复习笔记 - LZWcc&#39;s Blog</title><meta name="Description" content=""><meta property="og:url" content="http://localhost:1313/posts/java-oop-review/">
   <meta property="og:site_name" content="LZWcc&#39;s Blog">
-  <meta property="og:title" content="ELF 文件变量存储与段表/符号表分析笔记">
-  <meta property="og:description" content="问题如下如下例⼦ C 语⾔代码 hello.c
-c">
+  <meta property="og:title" content="面向对象程序设计--复习笔记">
+  <meta property="og:description" content="知识点 java">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-11-16T14:39:37+08:00">
-    <meta property="article:modified_time" content="2025-11-16T14:39:37+08:00">
-    <meta property="article:tag" content="Risc-V">
-    <meta property="article:tag" content="Os">
+    <meta property="article:published_time" content="2025-12-03T22:43:17+08:00">
+    <meta property="article:modified_time" content="2025-12-03T22:43:17+08:00">
+    <meta property="article:tag" content="OOP">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="ELF 文件变量存储与段表/符号表分析笔记">
-  <meta name="twitter:description" content="问题如下如下例⼦ C 语⾔代码 hello.c
-c">
+  <meta name="twitter:title" content="面向对象程序设计--复习笔记">
+  <meta name="twitter:description" content="知识点 java">
 <meta name="application-name" content="LZWcc&#39;s Blog">
 <meta name="apple-mobile-web-app-title" content="LZWcc&#39;s Blog">
 
@@ -28,15 +25,15 @@ c">
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 
-<link rel="canonical" href="http://localhost:1313/posts/elf-post01/" /><link rel="prev" href="http://localhost:1313/posts/create-node-proj/" /><link rel="next" href="http://localhost:1313/posts/java-oop-review/" />
+<link rel="canonical" href="http://localhost:1313/posts/java-oop-review/" /><link rel="prev" href="http://localhost:1313/posts/elf-post01/" />
 <link rel="stylesheet" href="/css/main.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">{"@context": "https://schema.org","@type": "BlogPosting",
-        "headline": "ELF 文件变量存储与段表/符号表分析笔记",
+        "headline": "面向对象程序设计--复习笔记",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "http://localhost:1313/posts/elf-post01/"
-        },"genre": "posts","keywords":["risc-v","os"],"wordcount":  627 ,
-        "url": "http://localhost:1313/posts/elf-post01/","datePublished": "2025-11-16T14:39:37+08:00","dateModified": "2025-11-16T14:39:37+08:00","publisher": {
+            "@id": "http://localhost:1313/posts/java-oop-review/"
+        },"genre": "posts","keywords":["OOP"],"wordcount":  236 ,
+        "url": "http://localhost:1313/posts/java-oop-review/","datePublished": "2025-12-03T22:43:17+08:00","dateModified": "2025-12-03T22:43:17+08:00","publisher": {
             "@type": "Organization",
             "name": "LZWcc"},"author": {
                 "@type": "Person",
@@ -126,27 +123,37 @@ c">
             <h2 class="tw-mx-0 tw-my-6 tw-uppercase tw-text-2xl">目录</h2>
             <div class="toc-content"><nav id="TableOfContents">
   <ul>
-    <li><a href="#问题如下">问题如下</a></li>
-    <li><a href="#前置工具objdump和readelf">前置工具(objdump和readelf)</a></li>
-    <li><a href="#知识补充表格chatgpt">知识补充表格(ChatGPT)</a></li>
+    <li><a href="#知识点">知识点</a></li>
+    <li><a href="#pta">PTA</a></li>
+    <li><a href="#头歌">头歌</a></li>
+    <li><a href="#清览">清览</a>
+      <ul>
+        <li><a href="#面向对象-第四章-1-作业">面向对象-第四章-1-作业</a></li>
+      </ul>
+    </li>
+    <li><a href="#面向对象-第五章-1-作业">面向对象-第五章-1-作业</a>
+      <ul>
+        <li><a href="#面向对象-第五章-2-作业">面向对象-第五章-2-作业</a></li>
+        <li><a href="#面向对象-第六章-配套试卷">面向对象-第六章-配套试卷</a></li>
+      </ul>
+    </li>
   </ul>
 </nav></div>
         </div>
-    </dialog><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2025-11-16" data-pagefind-body>ELF 文件变量存储与段表/符号表分析笔记</h1><div class="post-meta">
+    </dialog><article class="page single print:!tw-w-full print:!tw-max-w-none print:!tw-m-0 print:!tw-p-0"><h1 class="single-title" data-pagefind-meta="date:2025-12-03" data-pagefind-body>面向对象程序设计--复习笔记</h1><div class="post-meta">
             <div class="post-meta-line">
                 <span class="post-author"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"/></svg><a href="https://lzwcc.github.io" title="Author" target="_blank" rel="noopener noreferrer author" class="author">LZWcc</a>
-                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/os/"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M464 128H272l-54.63-54.63c-6-6-14.14-9.37-22.63-9.37H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48zm0 272H48V112h140.12l54.63 54.63c6 6 14.14 9.37 22.63 9.37H464v224z"/></svg>Os</a></span></div>
+                </span>&nbsp;<span class="post-category">收录于 </span>&nbsp;<span class="post-category">类别 <a href="/categories/java/"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M464 128H272l-54.63-54.63c-6-6-14.14-9.37-22.63-9.37H48C21.49 64 0 85.49 0 112v288c0 26.51 21.49 48 48 48h416c26.51 0 48-21.49 48-48V176c0-26.51-21.49-48-48-48zm0 272H48V112h140.12l54.63 54.63c6 6 14.14 9.37 22.63 9.37H464v224z"/></svg>Java</a></span></div>
             <div class="post-meta-line"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2025-11-16">2025-11-16</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2025-11-16">2025-11-16</time>&nbsp;<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;约 627 字&nbsp;
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M148 288h-40c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v40c0 6.6-5.4 12-12 12zm108-12v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 96v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm-96 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm192 0v-40c0-6.6-5.4-12-12-12h-40c-6.6 0-12 5.4-12 12v40c0 6.6 5.4 12 12 12h40c6.6 0 12-5.4 12-12zm96-260v352c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h48V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h128V12c0-6.6 5.4-12 12-12h40c6.6 0 12 5.4 12 12v52h48c26.5 0 48 21.5 48 48zm-48 346V160H48v298c0 3.3 2.7 6 6 6h340c3.3 0 6-2.7 6-6z"/></svg>&nbsp;<time datetime="2025-12-03">2025-12-03</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M402.3 344.9l32-32c5-5 13.7-1.5 13.7 5.7V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V112c0-26.5 21.5-48 48-48h273.5c7.1 0 10.7 8.6 5.7 13.7l-32 32c-1.5 1.5-3.5 2.3-5.7 2.3H48v352h352V350.5c0-2.1.8-4.1 2.3-5.6zm156.6-201.8L296.3 405.7l-90.4 10c-26.2 2.9-48.5-19.2-45.6-45.6l10-90.4L432.9 17.1c22.9-22.9 59.9-22.9 82.7 0l43.2 43.2c22.9 22.9 22.9 60 .1 82.8zM460.1 174L402 115.9 216.2 301.8l-7.3 65.3 65.3-7.3L460.1 174zm64.8-79.7l-43.2-43.2c-4.1-4.1-10.8-4.1-14.8 0L436 82l58.1 58.1 30.9-30.9c4-4.2 4-10.8-.1-14.9z"/></svg>&nbsp;<time datetime="2025-12-03">2025-12-03</time>&nbsp;<svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;约 236 字&nbsp;
                     <svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;预计阅读 3 分钟&nbsp;</div>
-        </div><div class="content" id="content" data-pagefind-body><h2 id="问题如下" class="headerLink">
-    <a href="#%e9%97%ae%e9%a2%98%e5%a6%82%e4%b8%8b" class="header-mark"></a>问题如下</h2><p>如下例⼦ C 语⾔代码 <code>hello.c</code></p>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm0 448c-110.5 0-200-89.5-200-200S145.5 56 256 56s200 89.5 200 200-89.5 200-200 200zm61.8-104.4l-84.9-61.7c-3.1-2.3-4.9-5.9-4.9-9.7V116c0-6.6 5.4-12 12-12h32c6.6 0 12 5.4 12 12v141.7l66.8 48.6c5.4 3.9 6.5 11.4 2.6 16.8L334.6 349c-3.9 5.3-11.4 6.5-16.8 2.6z"/></svg>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="content" id="content" data-pagefind-body><h2 id="知识点" class="headerLink">
+    <a href="#%e7%9f%a5%e8%af%86%e7%82%b9" class="header-mark"></a>知识点</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     
     tw-flex 
@@ -165,7 +172,7 @@ c">
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">c</p>
+          <p class="tw-select-none !tw-my-1">java</p>
       </button>
 
    <div class="tw-flex">
@@ -235,48 +242,32 @@ c">
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt; </span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="kt">int</span> <span class="n">global_init</span> <span class="o">=</span> <span class="mh">0x11111111</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">int</span> <span class="n">global_const</span> <span class="o">=</span> <span class="mh">0x22222222</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> 
-</span></span><span class="line"><span class="cl"><span class="p">{</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="kt">int</span> <span class="n">static_var</span> <span class="o">=</span> <span class="mh">0x33333333</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">static</span> <span class="kt">int</span> <span class="n">static_var_uninit</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">auto_var</span> <span class="o">=</span> <span class="mh">0x44444444</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;hello world!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span> 
-</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl"><span class="p">}</span> 
-</span></span></code></pre>
-</div>
-<p>请问编译为 .o 文件后，global_init, global_const, static_var, static_var_uninit, auto_var 这些变 量分别存放在那些 section ⾥，&ldquo;hello world!\n&rdquo; 这个字符串⼜在哪⾥？并尝试⽤⼯具查看并验证你的猜测\</p>
-<hr>
-<h2 id="前置工具objdump和readelf" class="headerLink">
-    <a href="#%e5%89%8d%e7%bd%ae%e5%b7%a5%e5%85%b7objdump%e5%92%8creadelf" class="header-mark"></a>前置工具(objdump和readelf)</h2>
-<div class="table-wrapper">
-  <table>
-    <thead>
-        <tr>
-            <th style="text-align: ">工具</th>
-            <th style="text-align: ">适合用途</th>
-            <th style="text-align: ">优点</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align: "><code>readelf</code></td>
-            <td style="text-align: ">查看 ELF 头、段表、符号表</td>
-            <td style="text-align: ">结构化信息清楚，但内容原始，需要自己解码</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>objdump</code></td>
-            <td style="text-align: ">查看二进制内容、反汇编、段内容</td>
-            <td style="text-align: ">可以直接看到每个字节的十六进制内容和对应 ASCII，方便找到字符串</td>
-        </tr>
-    </tbody>
-  </table>
+      "><span class="line"><span class="cl"><span class="c1">// 比较值是否相同</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">a</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">b</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 获取用户输入</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Scanner</span><span class="w"> </span><span class="n">sc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Scanner</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="na">in</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">String</span><span class="w"> </span><span class="n">str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sc</span><span class="p">.</span><span class="na">next</span><span class="p">();</span><span class="w">	</span><span class="c1">// 字符串</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kt">double</span><span class="w"> </span><span class="n">depositAmount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sc</span><span class="p">.</span><span class="na">nextDouble</span><span class="p">();</span><span class="w">	</span><span class="c1">// 浮点数</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 构造器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">Student</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">0</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Student</span><span class="p">()</span><span class="w"> </span><span class="p">{}</span><span class="w"> </span><span class="c1">// 空参数构造器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">Student</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="p">...);</span><span class="w">	</span><span class="c1">// 多参数构造器</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 静态初始化块 (只执行一次)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">static</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;This is static initialization block&#34;</span><span class="p">);</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 初始化块 (每次创建对象都会执行)</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="o">++</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;This is initialization block, id is &#34;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 重写toString方法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="s">&#34;一个字符串&#34;</span><span class="w"> </span><span class="p">}</span></span></span></code></pre>
 </div>
 <hr>
-<div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
+<h2 id="pta" class="headerLink">
+    <a href="#pta" class="header-mark"></a>PTA</h2><div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     
     tw-flex 
@@ -295,7 +286,7 @@ c">
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">bash</p>
+          <p class="tw-select-none !tw-my-1">java</p>
       </button>
 
    <div class="tw-flex">
@@ -365,11 +356,24 @@ c">
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl"><span class="c1"># 编译</span>
-</span></span><span class="line"><span class="cl">gcc -c hello.c -o hello.o</span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="kn">import</span><span class="w"> </span><span class="nn">java.util.*</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 主函数写法</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Main</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre>
 </div>
-<p><code>readelf -s</code>获得符号索引表, 记录了所有<strong>变量、函数、符号名</strong>与它们所在的 section 之间的对应关系。</p>
-<p>关键查看<strong>Ndx</strong> 含义:  该符号属于哪个段</p>
+<hr>
+<h2 id="头歌" class="headerLink">
+    <a href="#%e5%a4%b4%e6%ad%8c" class="header-mark"></a>头歌</h2><hr>
+<h2 id="清览" class="headerLink">
+    <a href="#%e6%b8%85%e8%a7%88" class="header-mark"></a>清览</h2><h3 id="面向对象-第四章-1-作业" class="headerLink">
+    <a href="#%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1-%e7%ac%ac%e5%9b%9b%e7%ab%a0-1-%e4%bd%9c%e4%b8%9a" class="header-mark"></a>面向对象-第四章-1-作业</h3><p>在调用方法时, 若要使方法改变实参的值, 可以<strong>用对象作为参数</strong></p>
+<p><strong>重载（Overload）</strong>：同一类中，方法名相同，但参数的个数、类型、顺序不同**(至少满足一项)**, <strong>仅返回值类型不同不构成重载</strong></p>
+<p><strong>覆盖（Override）</strong>：子类重写父类的方法，要求方法名、参数、返回值完全一致</p>
+<p>构造函数<strong>没有返回值类型(不是void型)</strong></p>
+<p>被 <code>private</code>修饰的成员变量只能被该类自身访问和修改, 调用</p>
+<p>Java 类默认会有一个 “隐式的无参构造方法”，但只要手动定义了任意构造方法，这个默认的无参构造方法就不再自动生成</p>
+<p><strong>匿名内部类</strong></p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     
@@ -389,7 +393,7 @@ c">
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">bash</p>
+          <p class="tw-select-none !tw-my-1">java</p>
       </button>
 
    <div class="tw-flex">
@@ -459,21 +463,29 @@ c">
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">readelf -s --wide hello.o <span class="c1"># -s获得符号索引表</span>
-</span></span><span class="line"><span class="cl">Symbol table <span class="s1">&#39;.symtab&#39;</span> contains <span class="m">10</span> entries:
-</span></span><span class="line"><span class="cl">   Num:    Value          Size Type    Bind   Vis      Ndx Name
-</span></span><span class="line"><span class="cl">     0: <span class="m">0000000000000000</span>     <span class="m">0</span> NOTYPE  LOCAL  DEFAULT  UND 
-</span></span><span class="line"><span class="cl">     1: <span class="m">0000000000000000</span>     <span class="m">0</span> FILE    LOCAL  DEFAULT  ABS hello.c
-</span></span><span class="line"><span class="cl">     2: <span class="m">0000000000000000</span>     <span class="m">0</span> SECTION LOCAL  DEFAULT    <span class="m">1</span> .text
-</span></span><span class="line"><span class="cl">     3: <span class="m">0000000000000000</span>     <span class="m">0</span> SECTION LOCAL  DEFAULT    <span class="m">5</span> .rodata
-</span></span><span class="line"><span class="cl">     4: <span class="m">0000000000000000</span>     <span class="m">4</span> OBJECT  LOCAL  DEFAULT    <span class="m">4</span> static_var_uninit.1
-</span></span><span class="line"><span class="cl">     5: <span class="m">0000000000000004</span>     <span class="m">4</span> OBJECT  LOCAL  DEFAULT    <span class="m">3</span> static_var.0
-</span></span><span class="line"><span class="cl">     6: <span class="m">0000000000000000</span>     <span class="m">4</span> OBJECT  GLOBAL DEFAULT    <span class="m">3</span> global_init
-</span></span><span class="line"><span class="cl">     7: <span class="m">0000000000000000</span>     <span class="m">4</span> OBJECT  GLOBAL DEFAULT    <span class="m">5</span> global_const
-</span></span><span class="line"><span class="cl">     8: <span class="m">0000000000000000</span>    <span class="m">37</span> FUNC    GLOBAL DEFAULT    <span class="m">1</span> main
-</span></span><span class="line"><span class="cl">     9: <span class="m">0000000000000000</span>     <span class="m">0</span> NOTYPE  GLOBAL DEFAULT  UND puts</span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="c1">// 父类</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="kd">class</span> <span class="nc">Animal</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sound</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;动物叫&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="c1">// 匿名内部类</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">Animal</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Animal</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Override</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">sound</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&#34;狗叫：汪汪！&#34;</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">};</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="n">a</span><span class="p">.</span><span class="na">sound</span><span class="p">();</span></span></span></code></pre>
 </div>
-<p><code>readelf -S</code>  <strong>查看 ELF 文件的 Section Header Table(段表)</strong></p>
+<h2 id="面向对象-第五章-1-作业" class="headerLink">
+    <a href="#%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1-%e7%ac%ac%e4%ba%94%e7%ab%a0-1-%e4%bd%9c%e4%b8%9a" class="header-mark"></a>面向对象-第五章-1-作业</h2><p>接口的正确定义需遵循以下规则</p>
+<ol>
+<li><strong>关键字</strong>：用 <code>interface</code>声明（不能用 <code>abstract</code>修饰，接口默认是抽象的）；</li>
+<li><strong>继承</strong>：接口可以通过 <code>extends</code>继承多个其他接口（类不支持多继承，但接口支持）；</li>
+</ol>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     
@@ -493,7 +505,7 @@ c">
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">bash</p>
+          <p class="tw-select-none !tw-my-1">java</p>
       </button>
 
    <div class="tw-flex">
@@ -563,38 +575,35 @@ c">
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">readelf -S --wide hello.o
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">There are <span class="m">14</span> section headers, starting at offset 0x308:
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Section Headers:
-</span></span><span class="line"><span class="cl">  <span class="o">[</span>Nr<span class="o">]</span> Name              Type            Address          Off    Size   ES Flg Lk Inf Al
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 0<span class="o">]</span>                   NULL            <span class="m">0000000000000000</span> <span class="m">000000</span> <span class="m">000000</span> <span class="m">00</span>      <span class="m">0</span>   <span class="m">0</span>  <span class="m">0</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 1<span class="o">]</span> .text             PROGBITS        <span class="m">0000000000000000</span> <span class="m">000040</span> <span class="m">000025</span> <span class="m">00</span>  AX  <span class="m">0</span>   <span class="m">0</span>  <span class="m">1</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 2<span class="o">]</span> .rela.text        RELA            <span class="m">0000000000000000</span> <span class="m">000248</span> <span class="m">000030</span> <span class="m">18</span>   I <span class="m">11</span>   <span class="m">1</span>  <span class="m">8</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 3<span class="o">]</span> .data             PROGBITS        <span class="m">0000000000000000</span> <span class="m">000068</span> <span class="m">000008</span> <span class="m">00</span>  WA  <span class="m">0</span>   <span class="m">0</span>  <span class="m">4</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 4<span class="o">]</span> .bss              NOBITS          <span class="m">0000000000000000</span> <span class="m">000070</span> <span class="m">000004</span> <span class="m">00</span>  WA  <span class="m">0</span>   <span class="m">0</span>  <span class="m">4</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 5<span class="o">]</span> .rodata           PROGBITS        <span class="m">0000000000000000</span> <span class="m">000070</span> <span class="m">000011</span> <span class="m">00</span>   A  <span class="m">0</span>   <span class="m">0</span>  <span class="m">4</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 6<span class="o">]</span> .comment          PROGBITS        <span class="m">0000000000000000</span> <span class="m">000081</span> 00002c <span class="m">01</span>  MS  <span class="m">0</span>   <span class="m">0</span>  <span class="m">1</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 7<span class="o">]</span> .note.GNU-stack   PROGBITS        <span class="m">0000000000000000</span> 0000ad <span class="m">000000</span> <span class="m">00</span>      <span class="m">0</span>   <span class="m">0</span>  <span class="m">1</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 8<span class="o">]</span> .note.gnu.property NOTE            <span class="m">0000000000000000</span> 0000b0 <span class="m">000020</span> <span class="m">00</span>   A  <span class="m">0</span>   <span class="m">0</span>  <span class="m">8</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span> 9<span class="o">]</span> .eh_frame         PROGBITS        <span class="m">0000000000000000</span> 0000d0 <span class="m">000038</span> <span class="m">00</span>   A  <span class="m">0</span>   <span class="m">0</span>  <span class="m">8</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span>10<span class="o">]</span> .rela.eh_frame    RELA            <span class="m">0000000000000000</span> <span class="m">000278</span> <span class="m">000018</span> <span class="m">18</span>   I <span class="m">11</span>   <span class="m">9</span>  <span class="m">8</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span>11<span class="o">]</span> .symtab           SYMTAB          <span class="m">0000000000000000</span> <span class="m">000108</span> 0000f0 <span class="m">18</span>     <span class="m">12</span>   <span class="m">6</span>  <span class="m">8</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span>12<span class="o">]</span> .strtab           STRTAB          <span class="m">0000000000000000</span> 0001f8 00004d <span class="m">00</span>      <span class="m">0</span>   <span class="m">0</span>  <span class="m">1</span>
-</span></span><span class="line"><span class="cl">  <span class="o">[</span>13<span class="o">]</span> .shstrtab         STRTAB          <span class="m">0000000000000000</span> <span class="m">000290</span> <span class="m">000074</span> <span class="m">00</span>      <span class="m">0</span>   <span class="m">0</span>  <span class="m">1</span>
-</span></span><span class="line"><span class="cl">Key to Flags:
-</span></span><span class="line"><span class="cl">  W <span class="o">(</span>write<span class="o">)</span>, A <span class="o">(</span>alloc<span class="o">)</span>, X <span class="o">(</span>execute<span class="o">)</span>, M <span class="o">(</span>merge<span class="o">)</span>, S <span class="o">(</span>strings<span class="o">)</span>, I <span class="o">(</span>info<span class="o">)</span>,
-</span></span><span class="line"><span class="cl">  L <span class="o">(</span>link order<span class="o">)</span>, O <span class="o">(</span>extra OS processing required<span class="o">)</span>, G <span class="o">(</span>group<span class="o">)</span>, T <span class="o">(</span>TLS<span class="o">)</span>,
-</span></span><span class="line"><span class="cl">  C <span class="o">(</span>compressed<span class="o">)</span>, x <span class="o">(</span>unknown<span class="o">)</span>, o <span class="o">(</span>OS specific<span class="o">)</span>, E <span class="o">(</span>exclude<span class="o">)</span>,
-</span></span><span class="line"><span class="cl">  D <span class="o">(</span>mbind<span class="o">)</span>, l <span class="o">(</span>large<span class="o">)</span>, p <span class="o">(</span>processor specific<span class="o">)</span></span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="kd">interface</span> <span class="nc">接口名</span><span class="w"> </span><span class="kd">extends</span><span class="w"> </span><span class="n">父接口1</span><span class="p">,</span><span class="w"> </span><span class="n">父接口2</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// 抽象方法（无方法体）</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">返回值类型</span><span class="w"> </span><span class="nf">方法名</span><span class="p">(</span><span class="n">参数列表</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="p">}</span></span></span></code></pre>
 </div>
-<p><code>objdump -s</code> 显示 ELF 文件中<strong>节（section）的完整内容</strong>，也就是<strong>原始二进制数据</strong>。</p>
-<p><strong>常用参数</strong>：</p>
+<p><code>String[] args</code> 和 <code>String args[]</code> 是数组声明的两种等价写法（前者是更推荐的 “数组类型 + 变量名” 风格，后者是兼容 C 语言的写法）。</p>
+<ol>
+<li>类修饰符：<code>abstract</code>（抽象类，需被继承）与 <code>final</code>（最终类，禁止继承）不能同时修饰类；</li>
+<li>方法修饰符：<code>abstract</code>（抽象方法，需被重写）与 <code>private</code>（私有方法，无法继承）不能共存；<code>abstract</code> 方法不能有方法体；</li>
+<li>变量修饰符：<code>protected</code>（受保护访问）与 <code>private</code>（私有访问）是互斥访问修饰符，不能同时修饰变量。
 <ul>
-<li><code>-s</code>：显示节内容</li>
-<li><code>-j &lt;section&gt;</code>：只显示指定节（比如 <code>.text</code>、<code>.rodata</code>、<code>.data</code> 等）</li>
+<li>接口<strong>本身不能用 <code>abstract</code> 修饰</strong>（默认抽象）；</li>
+<li>接口的方法<strong>默认是 <code>public abstract</code></strong>（只能用这两个修饰符）；</li>
+<li>接口的变量<strong>默认是 <code>public static final</code></strong>。</li>
 </ul>
+</li>
+</ol>
+<h3 id="面向对象-第五章-2-作业" class="headerLink">
+    <a href="#%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1-%e7%ac%ac%e4%ba%94%e7%ab%a0-2-%e4%bd%9c%e4%b8%9a" class="header-mark"></a>面向对象-第五章-2-作业</h3><p>Java编程所必须的默认引用包为 <code>java.lang</code>包</p>
+<p>使用 <code>Iterator</code>遍历集合时，<strong>必须通过 <code>Iterator</code>自身的 <code>remove()</code>方法删除元素</strong></p>
+<p>在Java中, 用 package 语句说明一个包时, 该包的层次结构必须<strong>与文件目录的层次相同</strong></p>
+<p>实现多重继承效果方式是<strong>接口(Interface)</strong></p>
+<ol>
+<li><strong>接口定义</strong>：用 <code>interface</code>关键字声明，接口中的方法默认是 <code>public abstract</code>（可省略，但显式写 <code>abstract</code>也合法）。</li>
+<li><strong>类实现接口</strong>：<strong>类通过 <code>implements</code>关键字实现多个接口</strong>（模拟 “多重继承”，因为 Java 类仅支持单继承，但可实现多个接口）。</li>
+<li><strong>规则</strong>：实现接口的类必须重写接口中所有抽象方法。</li>
+</ol>
+<h3 id="面向对象-第六章-配套试卷" class="headerLink">
+    <a href="#%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1-%e7%ac%ac%e5%85%ad%e7%ab%a0-%e9%85%8d%e5%a5%97%e8%af%95%e5%8d%b7" class="header-mark"></a>面向对象-第六章-配套试卷</h3><p>若方法内部调用了IOException, 需要在方法声明处通过 <code>throws</code>关键字声明该异常</p>
 <div class="code-block highlight is-closed show-line-numbers  tw-group tw-my-2">
   <div class="
     
@@ -614,7 +623,7 @@ c">
       aria-hidden="true">
           <div class="group-[.is-open]:tw-rotate-90 tw-transition-[transform] tw-duration-500 tw-ease-in-out print:!tw-hidden tw-w-min tw-h-min tw-my-1 tw-mx-1"><svg class="icon"
     xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/></svg></div>
-          <p class="tw-select-none !tw-my-1">bash</p>
+          <p class="tw-select-none !tw-my-1">java</p>
       </button>
 
    <div class="tw-flex">
@@ -684,134 +693,14 @@ c">
       tw-overflow-y-hidden
       tw-overflow-x-auto
       tw-scrollbar-thin
-      "><span class="line"><span class="cl">objdump -s --wide hello.o
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">hello.o:     file format elf64-x86-64
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">Contents of section .text:
-</span></span><span class="line"><span class="cl"> <span class="m">0000</span> f30f1efa 554889e5 4883ec10 c745fc44  ....UH..H....E.D
-</span></span><span class="line"><span class="cl"> <span class="m">0010</span> <span class="m">44444448</span> 8d050000 <span class="m">00004889</span> c7e80000  DDDH......H.....
-</span></span><span class="line"><span class="cl"> <span class="m">0020</span> 000090c9 c3                          .....       
-</span></span><span class="line"><span class="cl">Contents of section .data:
-</span></span><span class="line"><span class="cl"> <span class="m">0000</span> <span class="m">11111111</span> <span class="m">33333333</span>                    ....3333    
-</span></span><span class="line"><span class="cl">Contents of section .rodata:
-</span></span><span class="line"><span class="cl"> <span class="m">0000</span> <span class="m">22222222</span> 68656c6c 6f20776f 726c6421  <span class="s2">&#34;&#34;&#34;&#34;</span>hello world!
-</span></span><span class="line"><span class="cl"> <span class="m">0010</span> <span class="m">00</span>                                   .           
-</span></span><span class="line"><span class="cl">Contents of section .comment:
-</span></span><span class="line"><span class="cl"> <span class="m">0000</span> <span class="m">00474343</span> 3a202855 62756e74 <span class="m">75203133</span>  .GCC: <span class="o">(</span>Ubuntu <span class="m">13</span>
-</span></span><span class="line"><span class="cl"> <span class="m">0010</span> 2e332e30 2d367562 756e7475 327e3234  .3.0-6ubuntu2~24
-</span></span><span class="line"><span class="cl"> <span class="m">0020</span> 2e303429 2031332e 332e3000           .04<span class="o">)</span> 13.3.0.  
-</span></span><span class="line"><span class="cl">Contents of section .note.gnu.property:
-</span></span><span class="line"><span class="cl"> <span class="m">0000</span> <span class="m">04000000</span> <span class="m">10000000</span> <span class="m">05000000</span> 474e5500  ............GNU.
-</span></span><span class="line"><span class="cl"> <span class="m">0010</span> 020000c0 <span class="m">04000000</span> <span class="m">03000000</span> <span class="m">00000000</span>  ................
-</span></span><span class="line"><span class="cl">Contents of section .eh_frame:
-</span></span><span class="line"><span class="cl"> <span class="m">0000</span> <span class="m">14000000</span> <span class="m">00000000</span> 017a5200 <span class="m">01781001</span>  .........zR..x..
-</span></span><span class="line"><span class="cl"> <span class="m">0010</span> 1b0c0708 <span class="m">90010000</span> 1c000000 1c000000  ................
-</span></span><span class="line"><span class="cl"> <span class="m">0020</span> <span class="m">00000000</span> <span class="m">25000000</span> 00450e10 8602430d  ....%....E....C.
-</span></span><span class="line"><span class="cl"> <span class="m">0030</span> 065c0c07 <span class="m">08000000</span>                    .<span class="se">\.</span>.....   </span></span></code></pre>
+      "><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="n">methodName</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">IOException</span><span class="w"> </span><span class="p">{}</span></span></span></code></pre>
 </div>
-<p>可以得出结论👇</p>
-
-<div class="table-wrapper">
-  <table>
-    <thead>
-        <tr>
-            <th style="text-align: ">变量名</th>
-            <th style="text-align: ">定义</th>
-            <th style="text-align: ">存放段</th>
-            <th style="text-align: ">原因</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align: "><code>global_init</code></td>
-            <td style="text-align: ">全局变量 + 已初始化</td>
-            <td style="text-align: "><code>.data</code></td>
-            <td style="text-align: ">有初始值且可写</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>global_const</code></td>
-            <td style="text-align: ">全局常量</td>
-            <td style="text-align: "><code>.rodata</code></td>
-            <td style="text-align: ">const 数据只读</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>static_var</code></td>
-            <td style="text-align: ">局部静态 + 已初始化</td>
-            <td style="text-align: "><code>.data</code></td>
-            <td style="text-align: ">静态 + 已初始化</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>static_var_uninit</code></td>
-            <td style="text-align: ">局部静态 + 未初始化</td>
-            <td style="text-align: "><code>.bss</code></td>
-            <td style="text-align: ">静态 + 未初始化</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>auto_var</code></td>
-            <td style="text-align: ">局部变量（自动变量）</td>
-            <td style="text-align: "><strong>栈中（运行时分配）</strong></td>
-            <td style="text-align: ">不在任何 section 里</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>&quot;hello world!\n&quot;</code></td>
-            <td style="text-align: ">字符串字面量</td>
-            <td style="text-align: "><code>.rodata</code></td>
-            <td style="text-align: ">字符常量区（只读）</td>
-        </tr>
-    </tbody>
-  </table>
-</div>
-<h2 id="知识补充表格chatgpt" class="headerLink">
-    <a href="#%e7%9f%a5%e8%af%86%e8%a1%a5%e5%85%85%e8%a1%a8%e6%a0%bcchatgpt" class="header-mark"></a>知识补充表格(ChatGPT)</h2><p><strong>readelf</strong></p>
-
-<div class="table-wrapper">
-  <table>
-    <thead>
-        <tr>
-            <th style="text-align: ">参数</th>
-            <th style="text-align: ">含义</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align: "><code>-s</code></td>
-            <td style="text-align: "><strong>symbol table</strong>：显示符号表（函数、变量、全局符号等）</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>-S</code></td>
-            <td style="text-align: "><strong>section headers</strong>：显示段表信息（各段的名字、类型、大小、偏移等）</td>
-        </tr>
-    </tbody>
-  </table>
-</div>
-<p>✅ 逻辑很直观：小写 s → symbol，小写 S → section（但记得 S 大写）</p>
-<p><strong>objdump</strong></p>
-
-<div class="table-wrapper">
-  <table>
-    <thead>
-        <tr>
-            <th style="text-align: ">参数</th>
-            <th style="text-align: ">含义</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td style="text-align: "><code>-s</code></td>
-            <td style="text-align: "><strong>section contents</strong>：显示节（section）中的原始二进制数据（十六进制 + ASCII）</td>
-        </tr>
-        <tr>
-            <td style="text-align: "><code>-S</code></td>
-            <td style="text-align: "><strong>source + assembly</strong>：在反汇编时，同时显示对应的源代码（如果有调试信息）</td>
-        </tr>
-    </tbody>
-  </table>
-</div>
-<p>💡 <strong>记忆技巧</strong>：</p>
+<p>Java 异常分为<strong>检查型异常</strong>（编译期强制处理）和<strong>非检查型异常</strong>（运行时异常，编译期不强制处理）。</p>
 <ul>
-<li>readelf → 偏向 <strong>分析 ELF 结构</strong>（symbol、section）</li>
-<li>objdump → 偏向 <strong>分析指令/二进制</strong>（contents、disassembly）</li>
+<li><strong>A. NullPointerException</strong>：空指针异常，属于运行时异常（非检查型）。</li>
+<li><strong>B. ClassCastException</strong>：类型转换异常，属于运行时异常（非检查型）。</li>
+<li><strong>C. FileNotFoundException</strong>：文件未找到异常，属于检查型异常，编译期要求必须声明或捕获。</li>
+<li><strong>D. IndexOutOfBoundsException</strong>：索引越界异常，属于运行时异常（非检查型）。</li>
 </ul>
 </div>
 
@@ -819,7 +708,7 @@ c">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2025-11-16</span>
+                <span>更新于 2025-12-03</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -831,16 +720,14 @@ c">
 
     <div class="post-info-more">
         <section class="post-tags"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg>&nbsp;<a href="/tags/risc-v/">Risc-V</a>,&nbsp;<a href="/tags/os/">Os</a></section>
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M497.941 225.941L286.059 14.059A48 48 0 0 0 252.118 0H48C21.49 0 0 21.49 0 48v204.118a48 48 0 0 0 14.059 33.941l211.882 211.882c18.744 18.745 49.136 18.746 67.882 0l204.118-204.118c18.745-18.745 18.745-49.137 0-67.882zM112 160c-26.51 0-48-21.49-48-48s21.49-48 48-48 48 21.49 48 48-21.49 48-48 48zm513.941 133.823L421.823 497.941c-18.745 18.745-49.137 18.745-67.882 0l-.36-.36L527.64 323.522c16.999-16.999 26.36-39.6 26.36-63.64s-9.362-46.641-26.36-63.64L331.397 0h48.721a48 48 0 0 1 33.941 14.059l211.882 211.882c18.745 18.745 18.745 49.137 0 67.882z"/></svg>&nbsp;<a href="/tags/oop/">OOP</a></section>
         <section class="print:!tw-hidden">
             <span><button class="tw-text-fgColor-link-muted hover:tw-text-fgColor-link-muted-hover" onclick="window.history.back();">返回</button></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav print:tw-hidden"><a href="/posts/create-node-proj/" class="prev" rel="prev" title="Node &#43; Typescript项目初始化"><svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>Node &#43; Typescript项目初始化</a>
-            <a href="/posts/java-oop-review/" class="next" rel="next" title="面向对象程序设计--复习笔记">面向对象程序设计--复习笔记<svg class="icon"
-    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M224.3 273l-136 136c-9.4 9.4-24.6 9.4-33.9 0l-22.6-22.6c-9.4-9.4-9.4-24.6 0-33.9l96.4-96.4-96.4-96.4c-9.4-9.4-9.4-24.6 0-33.9L54.3 103c9.4-9.4 24.6-9.4 33.9 0l136 136c9.5 9.4 9.5 24.6.1 34z"/></svg></a></div>
+    <div class="post-nav print:tw-hidden"><a href="/posts/elf-post01/" class="prev" rel="prev" title="ELF 文件变量存储与段表/符号表分析笔记"><svg class="icon"
+    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512"><!-- Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) --><path d="M31.7 239l136-136c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9L127.9 256l96.4 96.4c9.4 9.4 9.4 24.6 0 33.9L201.7 409c-9.4 9.4-24.6 9.4-33.9 0l-136-136c-9.5-9.4-9.5-24.6-.1-34z"/></svg>ELF 文件变量存储与段表/符号表分析笔记</a></div>
 </div>
 </article></main><footer class="footer">
         <div class="footer-container"><div class="footer-line">
